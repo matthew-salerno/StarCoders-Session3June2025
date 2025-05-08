@@ -1,0 +1,26 @@
+<div class="card m-4">
+  <div class="card-header">
+    <!-- This will appear in the grey box at the top of the component -->
+    <!-- Use interpolation {{}} to show the MPAA Rating of the movie you searched for -->
+    <span> -- </span>
+
+    <div class="pull-right" *ngIf="isGoodRating">
+      <i class="fa fa-check text-success"></i>
+    </div>
+
+    <div class="pull-right" *ngIf="!isGoodRating">
+      <i class="fa fa-times text-danger"></i>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div>
+      <span>Choose a Maximum Rating</span>
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="preferredRating" (change)="checkRating()">
+        <option *ngFor="let option of POSSIBLE_RATINGS" value="{{option}}">{{option}}</option>
+      </select>
+    </div>
+
+
+  </div>
+</div>
