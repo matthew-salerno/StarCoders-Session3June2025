@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Signal, computed, effect, input, output, signal } from '@angular/core';
+import { Component, Signal, computed, effect, input, output, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OmdbResultDetails } from '../types/omdb';
@@ -17,6 +17,8 @@ export class CriticScoreComponent {
   });
   protected minPreferredScoreForm: number = 0.0;
   private minPreferredScore = signal<number>(this.minPreferredScoreForm);
+
+  // is good score is "computed" every time a contained signal is changed
   protected isGoodScore: Signal<boolean | null> = computed(() => {
       // good practice to put all your signals up front
       const score = this.result()?.metascore;
@@ -26,6 +28,7 @@ export class CriticScoreComponent {
   );
 
   constructor() {
+    // gets called whenever a contained signal (isGoodScore) changes
     effect(() => {
       this.goodScoreChanged.emit(this.isGoodScore());
     });

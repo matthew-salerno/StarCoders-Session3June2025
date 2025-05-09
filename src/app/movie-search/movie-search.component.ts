@@ -1,8 +1,7 @@
-import { NgIf } from '@angular/common';
-import { Component, Input, input, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OmdbApiService } from '../omdb-api.service';
-import { Subject, merge, tap } from 'rxjs';
+import { Subject } from 'rxjs';
 import { OmdbResultDetails} from '../types/omdb';
 import { outputFromObservable } from '@angular/core/rxjs-interop';
 

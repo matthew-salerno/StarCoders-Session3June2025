@@ -1,10 +1,7 @@
 <div>
   <div>
-    <!-- The three components - all of the HTML from the components will appear here on the screen -->
     <app-critic-score #criticScoreComponent [result]="this.omdbResult()" (good-score-changed)="this.onGoodScoreChanged($event)"></app-critic-score>
-
     <app-genre #genreComponent [result]="this.omdbResult()" (good-genre-changed)="this.onGoodGenreChanged($event)"></app-genre>
-
     <app-mpaa-rating #mpaaRatingComponent [result]="this.omdbResult()" (good-rating-changed)="this.onGoodRatingChanged($event)"></app-mpaa-rating>
   </div>
   <app-movie-search (result-changed)="this.onResultChanged($event)"></app-movie-search>

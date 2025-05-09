@@ -4,11 +4,11 @@
     <!-- Use interpolation {{}} to show the critic score of the movie you searched for -->
     <span> -- </span>
 
-    <div *ngIf="isGoodScore">
+    <div *ngIf="isGoodScore()">
       <!-- TODO -->
     </div>
 
-    <div *ngIf="!isGoodScore">
+    <div *ngIf="!isGoodScore()">
       <!-- TODO -->
     </div>
   </div>
