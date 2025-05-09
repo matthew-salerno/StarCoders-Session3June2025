@@ -1,0 +1,10 @@
+<div *ngIf="this.shouldWatch() !== null">
+  <p *ngIf="this.shouldWatch() === true; then watchTemplate; else dontWatchTemplate">
+  </p>
+  <ng-template #watchTemplate>
+    <span>It's a great movie! You should watch it.</span>
+  </ng-template>
+  <ng-template #dontWatchTemplate>
+    <span>This is not the movie for you! Don't watch it.</span>
+  </ng-template>
+</div>

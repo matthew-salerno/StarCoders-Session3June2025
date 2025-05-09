@@ -1,23 +1,21 @@
-<div class="card m-4">
-  <div class="card-header">
+<div>
+  <div>
     <!-- This will appear in the grey box at the top of the component -->
     <!-- Use interpolation {{}} to show the critic score of the movie you searched for -->
     <span> -- </span>
 
-    <div class="pull-right" *ngIf="isGoodScore">
-      <i class="fa fa-check text-success"></i>
+    <div *ngIf="isGoodScore">
+      <!-- TODO -->
     </div>
 
-    <div class="pull-right" *ngIf="!isGoodScore">
-      <i class="fa fa-times text-danger"></i>
+    <div *ngIf="!isGoodScore">
+      <!-- TODO -->
     </div>
   </div>
-  <div class="card-body">
-
-    <div class="mb-3">
-      <label for="minPreferredScore" class="form-label">Choose a Minimum Critic Score: </label>
-      <input type="text" class="form-control" id="minPreferredScore" [(ngModel)]="minPreferredScore" min="0.0" max="100.0" maxLength="5"
-      (change)="checkScores()"/>
+  <div>
+    <div>
+      <label for="minPreferredScore">Choose a Minimum Critic Score: </label>
+      <input type="text" id="minPreferredScore" [(ngModel)]="minPreferredScoreForm" min="0.0" max="100.0" maxLength="5" (ngModelChange)="this.onPreferredScoreChange()"/>
     </div>
 
   </div>

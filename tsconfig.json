@@ -6,6 +6,7 @@
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
+    "noErrorTruncation": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

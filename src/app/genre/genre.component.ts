@@ -1,47 +1,45 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, computed, effect, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { OmdbResultDetails } from '../types/omdb';
 
 @Component({
     selector: 'app-genre',
     templateUrl: './genre.component.html',
     styleUrls: ['./genre.component.css'],
-    imports: [NgIf, FormsModule]
+    imports: [FormsModule]
 })
-export class GenreComponent implements OnInit, OnChanges {
+export class GenreComponent {
   // this value is passed in from the parent component - AppComponent in app.component.ts
-  @Input() movieGenres!: string[];
+  public result = input<OmdbResultDetails>();
+  public goodGenreChanged = output<boolean | null>({
+    alias: 'good-genre-changed',
+  });
 
-  public preferredGenre: string;
-  public isGoodGenre!: boolean;
+  protected preferredGenreForm: string = 'All';
+  private preferredGenre = signal<string>(this.preferredGenreForm);
+  protected isGoodGenre = computed(() => {
+    const genres = this.result()?.genres;
+    const preferredGenre = this.preferredGenre();
+
+    return this.checkGenre(genres, preferredGenre);
+  });
 
   constructor() {
-    // you can set defaults in the constructor
-    // users change this value by selecting a different genre on the screen.
-    this.preferredGenre = 'All';
+    effect(() => {
+      this.goodGenreChanged.emit(this.isGoodGenre());
+    });
   }
 
-  ngOnInit() {}
-
   // anytime the Input is changed, this function is called automatically! Thanks Angular!
-  ngOnChanges() {
-    this.checkGenre();
+  onPreferredGenreChange() {
+    this.preferredGenre.set(this.preferredGenreForm);
   }
 
   // this function checks to make sure our movie is the same genre as the one we want to watch
-  checkGenre() {
-    if (
-      this.movieGenres.length > 0 &&
-      this.movieGenres.indexOf(this.preferredGenre) > -1
-    ) {
-      this.isGoodGenre = true;
-    } else if (this.movieGenres.length == 0 || this.preferredGenre == 'All') {
-      this.isGoodGenre = true;
-    } else {
-      this.isGoodGenre = false;
+  checkGenre(genres: string[] | undefined, preferredGenre: string): boolean | null {
+    if (genres === undefined || genres.length === 0) {
+      return null;
     }
-
-    // when you preview the application, hit F12 to open the developer tools and see these console messages
-    console.log('Good Genre? : ' + this.isGoodGenre);
+    return preferredGenre === 'All' || genres.includes(preferredGenre);
   }
 }

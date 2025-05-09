@@ -1,45 +1,19 @@
-<div class="card m-4">
-  <div class="card-header">
-    <!-- This will appear in the grey box at the top of the component -->
-    <!-- Use interpolation {{}} to show the genres of the movie you searched for -->
-    <span> -- </span>
-
-    <div class="pull-right" *ngIf="isGoodGenre">
-      <i class="fa fa-check text-success"></i>
-    </div>
-
-    <div class="pull-right" *ngIf="!isGoodGenre">
-      <i class="fa fa-times text-danger"></i>
-    </div>
-  </div>
-  <div class="card-body">
-    <div><span>Choose a Genre: </span></div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="preferredGenre" id="all" value="All" [(ngModel)] ="preferredGenre" (change)="checkGenre()">
-      <label class="form-check-label" for="all">
-        Any
-      </label>
-    </div>
-
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="preferredGenre" value="Action" id="actionOption" [(ngModel)] ="preferredGenre" (change)="checkGenre()">
-      <label class="form-check-label" for="actionOption">
-        Action
-      </label>
-    </div>
-
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="preferredGenre" value="Comedy" id="comedyOption" [(ngModel)] ="preferredGenre" (change)="checkGenre()">
-      <label class="form-check-label" for="comedyOption">
-        Comedy
-      </label>
-    </div>
-
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="preferredGenre" value="Drama" id="dramaOption" [(ngModel)] ="preferredGenre" (change)="checkGenre()">
-      <label class="form-check-label" for="dramaOption">
-        Drama
-      </label>
-    </div>
-  </div>
+<div>
+  <div><span>Choose a Genre: </span></div>
+  <input type="radio" name="preferredGenre" id="all" value="All" [(ngModel)]="preferredGenreForm" (ngModelChange)="onPreferredGenreChange()">
+  <label for="all">
+    Any
+  </label>
+  <input type="radio" name="preferredGenre" value="Action" id="actionOption" [(ngModel)]="preferredGenreForm" (ngModelChange)="onPreferredGenreChange()">
+  <label for="actionOption">
+    Action
+  </label>
+  <input type="radio" name="preferredGenre" value="Comedy" id="comedyOption" [(ngModel)]="preferredGenreForm" (ngModelChange)="onPreferredGenreChange()">
+  <label for="comedyOption">
+    Comedy
+  </label>
+  <input type="radio" name="preferredGenre" value="Drama" id="dramaOption" [(ngModel)]="preferredGenreForm" (ngModelChange)="onPreferredGenreChange()">
+  <label for="dramaOption">
+    Drama
+  </label> 
 </div>

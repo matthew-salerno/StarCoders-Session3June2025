@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, computed, effect, input, output, signal } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MpaaRating, OmdbResultDetails, POSSIBLE_MPAA_RATINGS, Rating, compareMpaaRatings, isUnrated } from '../types/omdb';
 
 @Component({
     selector: 'app-mpaa-rating',
@@ -8,36 +9,42 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./mpaa-rating.component.css'],
     imports: [NgIf, FormsModule, NgFor]
 })
-export class MpaaRatingComponent implements OnInit, OnChanges {
-  public readonly POSSIBLE_RATINGS = ['G', 'PG', 'PG-13', 'R'];
-
+export class MpaaRatingComponent {
   // this value is passed in from the parent component - AppComponent in app.component.ts
-  @Input() movieRating!: string;
-
+  public result = input<OmdbResultDetails>();
+  public goodRatingChanged = output<boolean | null>({
+    alias: 'good-rating-changed',
+  });
   // we are setting default values here, but notice the user can change these values by
   // selecting a different rating and by searching a movie
-  public preferredRating: string = 'R';
-  public isGoodRating: boolean = true;
+  protected preferredMaxRatingForm: MpaaRating = 'R';
+  private preferredMaxRating = signal<MpaaRating>(this.preferredMaxRatingForm);
+  protected isGoodRating = computed(() => {
+    const rated = this.result()?.rated ?? 'NR';
+    const maxRated = this.preferredMaxRating();
+    return this.checkRating(rated, maxRated);
+  });
+  // re-expose to template
+  protected readonly AVAILABLE_RATINGS = POSSIBLE_MPAA_RATINGS;
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+      this.goodRatingChanged.emit(this.isGoodRating());
+    });
+  }
 
-  ngOnInit() {}
-
-  // anytime the Input is changed, this function is called automatically! Thanks Angular!
-  ngOnChanges() {
-    this.checkRating();
+  onPreferredMaxRatingChange() {
+    this.preferredMaxRating.set(this.preferredMaxRatingForm);
   }
 
   // this function checks to make sure the movie we searched has an appropriate rating for us
-  checkRating() {
-    const maxRatingIndex = this.POSSIBLE_RATINGS.indexOf(this.preferredRating);
-    if (this.POSSIBLE_RATINGS.indexOf(this.movieRating) > maxRatingIndex) {
-      this.isGoodRating = false;
-    } else {
-      this.isGoodRating = true;
+  checkRating(rating: Rating, maxRating: MpaaRating): boolean | null {
+    if (isUnrated(rating)) {
+      return null;
     }
-
-    // when you preview the application, hit F12 to open the developer tools and see these console messages
-    console.log('Good MPAA Rating? : ' + this.isGoodRating);
+    else if (compareMpaaRatings(maxRating, rating) >= 0) {
+      return true;
+    }
+    return false;
   }
 }

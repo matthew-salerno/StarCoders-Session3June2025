@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, Signal, computed, effect, input, output, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OmdbResultDetails } from '../types/omdb';
 
 @Component({
     selector: 'app-critic-score',
@@ -8,35 +9,37 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./critic-score.component.css'],
     imports: [NgIf, FormsModule]
 })
-export class CriticScoreComponent implements OnInit, OnChanges {
+export class CriticScoreComponent {
   // this value is passed in from the parent component - AppComponent in app.component.ts
-  @Input() criticScore!: string;
+  public result = input<OmdbResultDetails>();
+  public goodScoreChanged = output<boolean | null>({
+    alias: 'good-score-changed',
+  });
+  protected minPreferredScoreForm: number = 0.0;
+  private minPreferredScore = signal<number>(this.minPreferredScoreForm);
+  protected isGoodScore: Signal<boolean | null> = computed(() => {
+      // good practice to put all your signals up front
+      const score = this.result()?.metascore;
+      const minScore = this.minPreferredScore();
+      return this.checkScores(score, minScore);
+    }
+  );
 
-  // we are setting default values here, but notice the user can change these values by
-  // entering a different score and by searching a movie
-  public minPreferredScore: number = 0.0;
-  public isGoodScore: boolean = true;
+  constructor() {
+    effect(() => {
+      this.goodScoreChanged.emit(this.isGoodScore());
+    });
+  }
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  // anytime the Input is changed, this function is called automatically! Thanks Angular!
-  ngOnChanges() {
-    this.checkScores();
+  onPreferredScoreChange() {
+    this.minPreferredScore.set(this.minPreferredScoreForm);
   }
 
   // this function checks to make sure the movie we searched has a good enough critic score for us
-  checkScores() {
-    const currentScore = parseFloat(this.criticScore);
-
-    if (currentScore >= this.minPreferredScore) {
-      this.isGoodScore = true;
-    } else {
-      this.isGoodScore = false;
+  checkScores(score: number | undefined, minScore: number): boolean | null {
+    if (score === undefined) {
+      return null;
     }
-
-    // when you preview the application, hit F12 to open the developer tools and see these console messages
-    console.log('Good Critic Score? : ' + this.isGoodScore);
+    return (score >= minScore);
   }
 }

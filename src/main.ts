@@ -2,7 +2,7 @@ import { bootstrapApplication, platformBrowser, BrowserModule } from '@angular/p
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
-import { ApiService } from './app/api.service';
+import { OmdbApiService } from './app/omdb-api.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
@@ -11,7 +11,7 @@ import { importProvidersFrom } from '@angular/core';
 bootstrapApplication(AppComponent, {
     providers: [
         importProvidersFrom(BrowserModule, FormsModule, HttpClientModule),
-        ApiService
+        OmdbApiService
     ]
 }).catch(e => console.error(e));
 

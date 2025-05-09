@@ -1,0 +1,10 @@
+<label for="movie-title">Enter a Movie Title:</label>
+<div>
+  <input
+    id="movie-title"
+    type="text"
+    [(ngModel)]="titleForm"
+    (ngModelChange)="onTitleChange()"
+  />
+</div>
+<button type="button" (click)="submitSearch()">Search Movies</button>

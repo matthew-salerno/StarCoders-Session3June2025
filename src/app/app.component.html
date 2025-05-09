@@ -1,52 +1,12 @@
-<div class="container-fluid">
-  <div class="row">
+<div>
+  <div>
     <!-- The three components - all of the HTML from the components will appear here on the screen -->
-    <app-critic-score #criticScoreComponent class="col" [criticScore]="criticRating"></app-critic-score>
+    <app-critic-score #criticScoreComponent [result]="this.omdbResult()" (good-score-changed)="this.onGoodScoreChanged($event)"></app-critic-score>
 
-    <app-genre #genreComponent class="col" [movieGenres]="movieGenre"></app-genre>
+    <app-genre #genreComponent [result]="this.omdbResult()" (good-genre-changed)="this.onGoodGenreChanged($event)"></app-genre>
 
-    <app-mpaa-rating #mpaaRatingComponent class="col" [movieRating]="mpaaRating"></app-mpaa-rating>
+    <app-mpaa-rating #mpaaRatingComponent [result]="this.omdbResult()" (good-rating-changed)="this.onGoodRatingChanged($event)"></app-mpaa-rating>
   </div>
-
-  <div class="form-container text-center mb-3">
-    <label for="movie-title" class="form-label">Enter a Movie Title:</label>
-    <div class="input-group w-50 m-auto">
-      <input
-        id="movie-title"
-        type="text"
-        class="form-control"
-        id="basic-url"
-        aria-describedby="basic-addon3"
-        [(ngModel)]="movieTitle"
-      />
-    </div>
-    <div id="errorContainer" *ngIf="error"><span class="text-danger fw-bold">{{errorMessage}}</span></div>
-
-    <!-- This is where the message will display telling you to watch or not to watch a movie you searched -->
-    <!-- We are using templates to show different messages depending on the results! -->
-    <div id="messageContainer" class="text-center" *ngIf="showMessage">
-      <p *ngIf="criticScoreComponent.isGoodScore && genreComponent.isGoodGenre && mpaaRatingComponent.isGoodRating; 
-              then watchTemplate; 
-              else dontWatchTemplate">
-      </p>
-      <ng-template #watchTemplate>
-        <span class="text-success fw-bold">It's a great movie! You should watch it.</span>
-      </ng-template>
-      <ng-template #dontWatchTemplate>
-        <span class="text-danger fw-bold">This is not the movie for you! Don't watch it.</span>
-      </ng-template>
-    </div>
-  </div>
-
-  <div class="results-container text-left p-2">
-    <div class="py-4">
-      <span>Movie to Search: </span> <span>{{movieTitle}}</span>
-    </div>
-
-    <button type="button" class="btn btn-primary" (click)="submitSearch()">Search Movies</button>
-
-    <div id="plotContainer">
-      <span>{{moviePlot}}</span>
-    </div>
-
-  </div>
+  <app-movie-search (result-changed)="this.onResultChanged($event)"></app-movie-search>
+  <app-movie-result [should-watch]="this.shouldWatch()"></app-movie-result>
+</div>
