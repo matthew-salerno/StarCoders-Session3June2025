@@ -1,13 +1,15 @@
-import { Component, Signal, computed, effect, input, model, output, signal } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { Component, Signal, computed, effect, input, model, output } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
+import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { OmdbResultDetails } from '../types/omdb';
 
 @Component({
     selector: 'app-critic-score',
     templateUrl: './critic-score.component.html',
     styleUrls: ['./critic-score.component.css'],
-    imports: [NgIf, FormsModule]
+    imports: [NgIf, FormsModule, FontAwesomeModule, CommonModule]
 })
 export class CriticScoreComponent {
   // this value is passed in from the parent component - AppComponent in app.component.ts
@@ -25,6 +27,26 @@ export class CriticScoreComponent {
       return this.checkScores(score, minScore);
     }
   );
+
+  protected iconStyle: Signal<IconDefinition> = computed(() => {
+    const isGood = this.isGoodScore();
+    if (isGood) {
+      return faCheckCircle;
+    }
+    else {
+      return faXmarkCircle;
+    }
+  });
+
+  protected iconColor: Signal<string> = computed(() => {
+    const isGood = this.isGoodScore();
+    if (isGood) {
+      return 'green';
+    }
+    else {
+      return 'red';
+    }
+  });
 
   constructor() {
     // gets called whenever a contained signal (isGoodScore) changes

@@ -1,22 +1,10 @@
 <div>
-  <div>
-    <!-- This will appear in the grey box at the top of the component -->
-    <!-- Use interpolation {{}} to show the critic score of the movie you searched for -->
-    <span> -- </span>
-
-    <div *ngIf="isGoodScore()">
-      <!-- TODO -->
-    </div>
-
-    <div *ngIf="!isGoodScore()">
-      <!-- TODO -->
-    </div>
-  </div>
-  <div>
-    <div>
-      <label for="minPreferredScore">Choose a Minimum Critic Score: </label>
-      <input type="text" id="minPreferredScore" [(ngModel)]="minPreferredScore" min="0.0" max="100.0" maxLength="5"/>
-    </div>
-
-  </div>
+  <fa-icon 
+    *ngIf="result()"
+    [ngStyle]="{'margin-right': '1rem', 'color': iconColor()}"
+    [icon]="iconStyle()"
+    [title]="`Score: ${result()?.metascore?.toFixed(2)}`"
+  />
+  <label for="minPreferredScore">Choose a Minimum Critic Score: </label>
+  <input type="number" id="minPreferredScore" [(ngModel)]="minPreferredScore" min="0.0" max="100.0" maxLength="5"/>
 </div>

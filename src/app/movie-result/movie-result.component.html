@@ -1,10 +1,13 @@
 <div *ngIf="this.shouldWatch() !== null">
-  <p *ngIf="this.shouldWatch() === true; then watchTemplate; else dontWatchTemplate">
-  </p>
-  <ng-template #watchTemplate>
-    <span>It's a great movie! You should watch it.</span>
-  </ng-template>
-  <ng-template #dontWatchTemplate>
-    <span>This is not the movie for you! Don't watch it.</span>
-  </ng-template>
+  <p *ngIf="this.shouldWatch() === true; then watchTemplate; else dontWatchTemplate"></p>
 </div>
+<div>
+  <p>{{this.result()?.plot}}</p>
+</div>
+
+<ng-template #watchTemplate>
+  <span>It's a great movie! You should watch it.</span>
+</ng-template>
+<ng-template #dontWatchTemplate>
+  <span>This is not the movie for you! Don't watch it.</span>
+</ng-template>

@@ -2,8 +2,8 @@
 <div>
   <input
     id="movie-title"
-    type="text"
+    type="search"
     [(ngModel)]="title"
-  />
+  >
 </div>
-<button type="button" (click)="submitSearch()">Search Movies</button>
+<input type="submit" (click)="submitSearch()" value="Search Movies">

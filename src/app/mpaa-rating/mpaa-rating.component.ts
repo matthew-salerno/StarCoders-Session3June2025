@@ -1,13 +1,15 @@
-import { Component, computed, effect, input, model, output, signal } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+import { Component, Signal, computed, effect, input, model, output, signal } from '@angular/core';
+import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MpaaRating, OmdbResultDetails, POSSIBLE_MPAA_RATINGS, Rating, compareMpaaRatings, isUnrated } from '../types/omdb';
+import { FontAwesomeModule, IconDefinition } from '@fortawesome/angular-fontawesome';
+import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
     selector: 'app-mpaa-rating',
     templateUrl: './mpaa-rating.component.html',
     styleUrls: ['./mpaa-rating.component.css'],
-    imports: [NgIf, FormsModule, NgFor]
+    imports: [NgIf, FormsModule, NgFor, FontAwesomeModule, CommonModule]
 })
 export class MpaaRatingComponent {
   // this value is passed in from the parent component - AppComponent in app.component.ts
@@ -22,6 +24,26 @@ export class MpaaRatingComponent {
     const rated = this.result()?.rated ?? 'NR';
     const maxRated = this.preferredMaxRating();
     return this.checkRating(rated, maxRated);
+  });
+
+  protected iconStyle: Signal<IconDefinition> = computed(() => {
+    const isGood = this.isGoodRating();
+    if (isGood) {
+      return faCheckCircle;
+    }
+    else {
+      return faXmarkCircle;
+    }
+  });
+
+  protected iconColor: Signal<string> = computed(() => {
+    const isGood = this.isGoodRating();
+    if (isGood) {
+      return 'green';
+    }
+    else {
+      return 'red';
+    }
   });
   // re-expose to template
   protected readonly AVAILABLE_RATINGS = POSSIBLE_MPAA_RATINGS;

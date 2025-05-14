@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { OmdbResultDetails } from '../types/omdb';
 
 @Component({
   selector: 'app-movie-result',
@@ -12,4 +13,5 @@ export class MovieResultComponent {
   shouldWatch = input<boolean | null>(null, {
     alias: "should-watch",
   });
+  result = input<OmdbResultDetails>();
 }
