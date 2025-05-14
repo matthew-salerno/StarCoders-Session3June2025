@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OmdbApiService } from '../omdb-api.service';
 import { Subject } from 'rxjs';
@@ -12,17 +12,12 @@ import { outputFromObservable } from '@angular/core/rxjs-interop';
   styleUrl: './movie-search.component.css'
 })
 export class MovieSearchComponent {
-  protected titleForm = "";
-  private title = signal<string>("");
+  protected title = model<string>("");
   private omdbResults$ = new Subject<OmdbResultDetails>();
   public newResult = outputFromObservable(this.omdbResults$, {alias: 'result-changed'});
   constructor(
     private omdbApi: OmdbApiService,
   ) { }
-
-  onTitleChange() {
-    this.title.set(this.titleForm);
-  }
 
   submitSearch() {
     this.omdbApi.retrieveOmdb({title: this.title()}).subscribe({

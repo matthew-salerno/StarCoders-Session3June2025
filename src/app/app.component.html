@@ -1,9 +1,9 @@
 <div>
   <div>
-    <app-critic-score #criticScoreComponent [result]="this.omdbResult()" (good-score-changed)="this.onGoodScoreChanged($event)"></app-critic-score>
-    <app-genre #genreComponent [result]="this.omdbResult()" (good-genre-changed)="this.onGoodGenreChanged($event)"></app-genre>
-    <app-mpaa-rating #mpaaRatingComponent [result]="this.omdbResult()" (good-rating-changed)="this.onGoodRatingChanged($event)"></app-mpaa-rating>
+    <app-critic-score [result]="this.omdbResult()" (good-score-changed)="this.isGoodScore.set($event)"></app-critic-score>
+    <app-genre [result]="this.omdbResult()" (good-genre-changed)="this.isGoodGenre.set($event)"></app-genre>
+    <app-mpaa-rating [result]="this.omdbResult()" (good-rating-changed)="this.isGoodRating.set($event)"></app-mpaa-rating>
   </div>
-  <app-movie-search (result-changed)="this.onResultChanged($event)"></app-movie-search>
+  <app-movie-search (result-changed)="this.omdbResult.set($event)"></app-movie-search>
   <app-movie-result [should-watch]="this.shouldWatch()"></app-movie-result>
 </div>

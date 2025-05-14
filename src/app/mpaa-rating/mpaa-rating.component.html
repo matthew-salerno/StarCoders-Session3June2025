@@ -16,7 +16,7 @@
 
     <div>
       <span>Choose a Maximum Rating</span>
-      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="preferredMaxRatingForm" (ngModelChange)="onPreferredMaxRatingChange()">
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="preferredMaxRating">
         <option *ngFor="let option of AVAILABLE_RATINGS" value="{{option}}">{{option}}</option>
       </select>
     </div>

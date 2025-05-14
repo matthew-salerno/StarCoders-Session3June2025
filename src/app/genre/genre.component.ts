@@ -1,4 +1,4 @@
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, model, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OmdbResultDetails } from '../types/omdb';
 
@@ -15,8 +15,7 @@ export class GenreComponent {
     alias: 'good-genre-changed',
   });
 
-  protected preferredGenreForm: string = 'All';
-  private preferredGenre = signal<string>(this.preferredGenreForm);
+  protected preferredGenre = model<string>('All');
   protected isGoodGenre = computed(() => {
     const genres = this.result()?.genres;
     const preferredGenre = this.preferredGenre();
@@ -28,11 +27,6 @@ export class GenreComponent {
     effect(() => {
       this.goodGenreChanged.emit(this.isGoodGenre());
     });
-  }
-
-  // anytime the Input is changed, this function is called automatically! Thanks Angular!
-  onPreferredGenreChange() {
-    this.preferredGenre.set(this.preferredGenreForm);
   }
 
   // this function checks to make sure our movie is the same genre as the one we want to watch

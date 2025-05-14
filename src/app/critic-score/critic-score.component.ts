@@ -1,4 +1,4 @@
-import { Component, Signal, computed, effect, input, output, signal } from '@angular/core';
+import { Component, Signal, computed, effect, input, model, output, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OmdbResultDetails } from '../types/omdb';
@@ -15,8 +15,7 @@ export class CriticScoreComponent {
   public goodScoreChanged = output<boolean | null>({
     alias: 'good-score-changed',
   });
-  protected minPreferredScoreForm: number = 0.0;
-  private minPreferredScore = signal<number>(this.minPreferredScoreForm);
+  protected minPreferredScore = model<number>(0.0);
 
   // is good score is "computed" every time a contained signal is changed
   protected isGoodScore: Signal<boolean | null> = computed(() => {
@@ -32,10 +31,6 @@ export class CriticScoreComponent {
     effect(() => {
       this.goodScoreChanged.emit(this.isGoodScore());
     });
-  }
-
-  onPreferredScoreChange() {
-    this.minPreferredScore.set(this.minPreferredScoreForm);
   }
 
   // this function checks to make sure the movie we searched has a good enough critic score for us

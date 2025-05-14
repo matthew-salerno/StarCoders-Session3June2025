@@ -1,4 +1,4 @@
-import { Component, computed, effect, input, output, signal } from '@angular/core';
+import { Component, computed, effect, input, model, output, signal } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MpaaRating, OmdbResultDetails, POSSIBLE_MPAA_RATINGS, Rating, compareMpaaRatings, isUnrated } from '../types/omdb';
@@ -17,8 +17,7 @@ export class MpaaRatingComponent {
   });
   // we are setting default values here, but notice the user can change these values by
   // selecting a different rating and by searching a movie
-  protected preferredMaxRatingForm: MpaaRating = 'R';
-  private preferredMaxRating = signal<MpaaRating>(this.preferredMaxRatingForm);
+  protected preferredMaxRating = model<MpaaRating>('R');
   protected isGoodRating = computed(() => {
     const rated = this.result()?.rated ?? 'NR';
     const maxRated = this.preferredMaxRating();
@@ -31,10 +30,6 @@ export class MpaaRatingComponent {
     effect(() => {
       this.goodRatingChanged.emit(this.isGoodRating());
     });
-  }
-
-  onPreferredMaxRatingChange() {
-    this.preferredMaxRating.set(this.preferredMaxRatingForm);
   }
 
   // this function checks to make sure the movie we searched has an appropriate rating for us
