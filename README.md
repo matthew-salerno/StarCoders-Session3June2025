@@ -1,59 +1,59 @@
-# StarCodersAngular
+# Instructions
+## Setup
+Introduce the application. Try out the UI, and walk through app.component.html.Understand how the components are connected.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+1. Run the app and find an action movies with a critic score above 70 and have a maximum rating of PG-13.
+    - Black Panther
+    - Inception
+    - Godzilla Minus One
 
-## Development server
+2. Display the movie's plot in the search results.
+  Look at `movie-result.component.html` (and the `OmdbResultDetails` function in 
+  `omdb.ts` for help on variable names).  
+  Line 7 add:  
+    ```html
+    <p>{{this.result()?.plot}}</p>
+    ```
 
-To start a local development server, run:
+3. The icon next to rating is missing! Add a <img alt="check mark" src="assets/circle-check-regular.svg" style="width:1em; height:1em;">  or <img alt="X mark" src="assets/circle-xmark-regular.svg" style="width:1em; height:1em;"> icon left of 
+ the rating criteria. 
+ Look at `mpaa-rating.component.html`, (and other `component.html` files as reference).  
+ Line 5 add:  
+    ```html
+    [icon]="iconStyle()"
+    ```
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Challenges
+Explore each component independently! Spend a few minutes working independently, and then discuss with the group. Hints are available by clicking the arrows, but try doing it on your own first.  
+### 1. Critic Score
+Change the first criteria to "Choose a Maximum Critic Score"
+<details>
+  <summary>Solution</summary>  
+  
+  Look at `critic-score.component.ts`, `checkScores` function. Line 63 should be `<=`
+  
+</details>
+  
 
-## Code scaffolding
+### 2. Genre
+Change the second criteria to have an option for "Documentary"
+<details>
+  <summary>Solution</summary>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+  Look at `genre.component.html`. Add an additional input and label similar to how other genres are implemented.  
+    
+</details>
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 3. MPAA Rating
+Change the third criteria to "Choose a Minimum Rating"
+<details>
+  <summary>Solution</summary>
+  
+  Look at `omdb.ts`, `compareMpaaRatings` function. Line 26 switch `a` and `b`.
 
-```bash
-ng generate --help
-```
+</details>
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Bonus
+Change the genre criteria to be multiselect. Do not use "Any" as an option.

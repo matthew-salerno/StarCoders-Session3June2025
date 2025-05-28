@@ -1,0 +1,15 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vsliveshare.vsliveshare",
+        "angular.ng-template"
+      ]
+    }
+  },
+  "secrets": {
+    "OMDB_API": {
+      "description": "API Key to access OMDB"
+    }
+  }
+}

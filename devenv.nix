@@ -1,15 +1,17 @@
 { pkgs, ... }:
 
 {
-  # https://devenv.sh/basics/
-  env.GREET = "devenv";
-
   # https://devenv.sh/packages/
   packages = [
     pkgs.git
   ];
   languages.javascript = { 
     enable = true;
-    pnpm.enable = true;
+    npm = {
+      enable = true;
+      install.enable = true;
+    };
   };
+
+  devcontainer.enable = false;
 }
