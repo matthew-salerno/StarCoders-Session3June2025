@@ -2,12 +2,10 @@
   <fa-icon 
     *ngIf="result()"
     [ngStyle]="{'margin-right': '1rem', 'color': iconColor()}"
-    [icon]="iconStyle()"
     [title]="`Rated ${result()?.rated}`"
   />
   <span>Choose a Maximum Rating: </span>
   <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="preferredMaxRating">
     <option *ngFor="let option of AVAILABLE_RATINGS" value="{{option}}">{{option}}</option>
   </select>
-
 </div>

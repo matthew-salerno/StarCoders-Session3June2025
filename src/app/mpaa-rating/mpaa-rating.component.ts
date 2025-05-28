@@ -20,6 +20,7 @@ export class MpaaRatingComponent {
   // we are setting default values here, but notice the user can change these values by
   // selecting a different rating and by searching a movie
   protected preferredMaxRating = model<MpaaRating>('R');
+  
   protected isGoodRating = computed(() => {
     const rated = this.result()?.rated ?? 'NR';
     const maxRated = this.preferredMaxRating();
@@ -45,6 +46,7 @@ export class MpaaRatingComponent {
       return 'red';
     }
   });
+  
   // re-expose to template
   protected readonly AVAILABLE_RATINGS = POSSIBLE_MPAA_RATINGS;
 

@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, computed, effect, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { OmdbResultDetails } from '../types/omdb';
 
@@ -14,4 +14,14 @@ export class MovieResultComponent {
     alias: "should-watch",
   });
   result = input<OmdbResultDetails>();
+  displayResult!: string;
+  resultText = computed(() => {
+    const shouldWatch = this.shouldWatch();
+    if (shouldWatch) {
+      return "It's a great movie! You should watch it.";
+    }
+    else {
+      return "This is not the movie for you! Don't watch it.";
+    }
+  });
 }
