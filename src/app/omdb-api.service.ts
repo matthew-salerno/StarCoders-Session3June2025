@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Observable, map, retry } from 'rxjs';
 import { OmdbResultDetails, OmdbErrorResponse, OmdbLookup, OmdbLookupResponse, OmdbSearch, OmdbSearchResponse, OmdbSearchResult, makeOmdbRequest, convertOmdbResponse } from './types/omdb';
 
@@ -7,14 +8,28 @@ import { OmdbResultDetails, OmdbErrorResponse, OmdbLookup, OmdbLookupResponse, O
   providedIn: 'root'
 })
 export class OmdbApiService {
-  private API_KEY = '540d48e8';
+  private API_KEY?: string;
   private API_URL = 'https://www.omdbapi.com/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    @Inject(DOCUMENT) document: Document
+  ) {
+    const key = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("omdbapikey="))
+    ?.split("=")[1];
+    if (typeof key === 'string') {
+      this.API_KEY = key;
+    }
+  }
 
   public retrieveOmdb(request: OmdbLookup): Observable<OmdbResultDetails>;
   public retrieveOmdb(request: OmdbSearch): Observable<OmdbSearchResult[]>;
   public retrieveOmdb(request: OmdbLookup | OmdbSearch): Observable<OmdbResultDetails | OmdbSearchResult[]> {
+    if (this.API_KEY === undefined) {
+      throw new Error("No API Key!");
+    }
     const headers = new HttpHeaders({
       Accept: 'application/json'
     });
