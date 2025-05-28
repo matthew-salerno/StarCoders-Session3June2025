@@ -2,7 +2,9 @@
   <p *ngIf="this.shouldWatch() === true; then watchTemplate; else dontWatchTemplate"></p>
 </div>
 <div>
-  <p>{{this.result()?.plot}}</p>
+  <p>Movie Title: {{this.result()?.title}}</p>
+  <p>Release Year: {{this.result()?.year}}</p>
+  <p>Plot:</p>
 </div>
 
 <ng-template #watchTemplate>

@@ -1,0 +1,33 @@
+Challenges
+
+0) Introduce the application. Try out the UI, and walk through app.component.html.
+Understand how the components are connected.
+
+1) Run the app and find an action movies with a critic score above 70 
+and have a maximum rating of PG-13.
+        - Black Panther
+        - Inception
+        - Godzilla Minus One
+
+2) Display the movie's plot in the search results.
+        - Look at movie-result.component.html (and the OmdbResultDetails function in 
+        omdb.ts for help on variable names). Line 7 add "<p>{{this.result()?.plot}}</p>"
+
+3) Another easy-ish challenge?
+
+4) Explore each component independently! Spend 5 minutes working independently, 
+and then discuss with the group. 
+    a) Change the first criteria to "Choose a Maximum Critic Score"
+        - Look at critic-score.component.ts, checkScores function. 
+        Line 63 should be "<=".
+
+    b) Change the second criteria to have an option for "Documentary"
+        - Look at genre.component.html. Add an additional input 
+        and label similar to how other genres are implemented.
+
+    c) Change the first criteria to "Choose a Minimum Rating"
+        - Look at omdb.ts, compareMpaaRatings function. Line 26 switch "a" and "b"
+
+5) Modify the application to that movie results are generated when any field is changed,
+not using the button.
+        - Ask Matt for help on this
