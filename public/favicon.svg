@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="12.53125"
+     inkscape:cx="26.294264"
+     inkscape:cy="29.007481"
+     inkscape:window-width="3440"
+     inkscape:window-height="1412"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:type="star"
+       style="vector-effect:non-scaling-stroke;fill:#0e5447;fill-opacity:1;-inkscape-stroke:hairline"
+       id="path4"
+       inkscape:flatsided="false"
+       sodipodi:sides="4"
+       sodipodi:cx="11.24283"
+       sodipodi:cy="7.2647071"
+       sodipodi:r1="21.968555"
+       sodipodi:r2="10.716419"
+       sodipodi:arg1="0.0076278846"
+       sodipodi:arg2="0.83516525"
+       inkscape:rounded="0.052858605"
+       inkscape:randomized="0"
+       d="M 33.210747,7.4322791 C 33.166829,8.3138456 19.063013,14.590581 18.434139,15.20994 17.837735,15.797319 11.911307,29.274273 11.075258,29.232623 10.193692,29.188706 3.9169562,15.08489 3.2975976,14.456016 2.7102184,13.859612 -10.766736,7.9331837 -10.725086,7.0971351 -10.681169,6.2155686 3.4226472,-0.06116694 4.0515217,-0.68052557 4.6479255,-1.2679048 10.574354,-14.744859 11.410402,-14.703209 c 0.881567,0.04392 7.158302,14.14773297 7.777661,14.77660752 0.587379,0.59640384 14.064333,6.52283198 14.022684,7.35888058 z"
+       transform="translate(12.75717,16.735293)" />
+  </g>
+</svg>

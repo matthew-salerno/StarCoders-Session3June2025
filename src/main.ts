@@ -1,5 +1,4 @@
-import { bootstrapApplication, platformBrowser, BrowserModule } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 
 import { OmdbApiService } from './app/omdb-api.service';
